@@ -14,8 +14,8 @@ const userLoginSchema = Joi.object({
 
 const itemSchema = Joi.object({
   userId: Joi.string().required(),
-  productId: Joi.string().trim().required(),
-  productName: Joi.string().pattern(/^[A-Za-z ]+$/).required(),
+  productId: Joi.string().min(3).max(20).trim().required(),
+  productName: Joi.string().min(3).max(20).pattern(/^[A-Za-z ]+$/).required(),
   category: Joi.string().trim().valid("electronics", "beauty", "clothes", "groceries", "footwear", "other").required(),
   price: Joi.number().positive().required(),
   quantity: Joi.number().integer().min(1).required()
@@ -28,7 +28,7 @@ const checkoutSchema = Joi.object({
 
 const removeItemSchema = Joi.object({
     userId: Joi.string().trim().required(),
-    productId: Joi.string().trim().required()
+    productId: Joi.string().min(3).max(20).trim().required()
 });
 
 module.exports = {userRegisterSchema, userLoginSchema, itemSchema, checkoutSchema, removeItemSchema}

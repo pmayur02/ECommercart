@@ -1,12 +1,11 @@
 const validate = (schema, property = 'body') => {
   return (req, res, next) => {
     const { error, value } = schema.validate(req[property], {
-      abortEarly: false, // Return all errors, not just the first one
-      stripUnknown: true // Remove unknown keys from the validated data
+      abortEarly: false,
+      stripUnknown: true
     });
 
     if (error) {
-      // Extract error messages
       const errorMessages = error.details.map(detail => ({
         field: detail.path.join('.'),
         message: detail.message
@@ -18,7 +17,6 @@ const validate = (schema, property = 'body') => {
       });
     }
 
-    // Replace request property with validated value
     req[property] = value;
     next();
   };

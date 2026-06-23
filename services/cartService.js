@@ -39,7 +39,7 @@ module.exports.addItem = async (data) => {
         // Increase quantity
         existingItem.quantity += quantity;
 
-        // Update latest details
+        
         existingItem.productName = productName;
         existingItem.category = category;
         existingItem.price = price;
@@ -88,9 +88,7 @@ module.exports.removeItem = async (userId, productId) => {
 
     cart.items = cart.items.filter(item => item.productId !== productId);
     const cartData = await cart.save();
-
-
-    //const cartData = await cart.save();
+ 
 
     if (!cartData?._id) {
         return {
